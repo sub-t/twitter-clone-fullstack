@@ -1,0 +1,18 @@
+{
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "git.ignoreLimitWarning": true,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}

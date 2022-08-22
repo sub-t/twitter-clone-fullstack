@@ -1,0 +1,74 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  email            String     @unique
+  name             String
+  screenName       String     @unique
+  location         String?
+  url              String?
+  description      String?
+  protected        Boolean    @default(true)
+  verified         Boolean    @default(false)
+  password         String
+  profileBannerUrl String?
+  profileImageUrl  String?
+  tweets           Tweet[]
+  favorites        Favorite[]
+
+  followers Follows[] @relation("to")
+  friends   Follows[] @relation("from")
+}
+
+model Follows {
+  from   User   @relation("from", fields: [fromId], references: [id])
+  fromId String
+  to     User   @relation("to", fields: [toId], references: [id])
+  toId   String
+
+  @@id([fromId, toId])
+}
+
+model Tweet {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  text   String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  favorites Favorite[]
+
+  tweetId String?
+  tweet   Tweet?  @relation("TweetReplies", fields: [tweetId], references: [id])
+  replies Tweet[] @relation("TweetReplies")
+
+  @@unique([id, userId])
+  @@index([userId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+  tweet   Tweet  @relation(fields: [tweetId], references: [id])
+  tweetId String
+
+  @@unique([id, userId])
+  @@index([userId])
+}
