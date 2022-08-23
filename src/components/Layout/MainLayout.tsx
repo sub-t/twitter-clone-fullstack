@@ -29,11 +29,11 @@ export const MainLayout = ({ children, title, home = false }: Props) => {
       <ComposeTweet />
 
       <div className="flex">
-        <div className="md:flex-grow" />
+        <div className="sm:flex-grow" />
         {/* side navigation */}
         <header
           role="banner"
-          className="flex-shrink-0 md:w-[88px] 2xl:w-[275px]"
+          className="flex-shrink-0 w-[68px] sm:w-[88px] 2xl:w-[275px]"
         >
           <div className="top-0 bottom-0 sticky">
             <NavBar user={user} />
@@ -43,10 +43,10 @@ export const MainLayout = ({ children, title, home = false }: Props) => {
           role="main"
           className="min-w-0 flex-grow flex justify-between lg:max-w-[920px] xl:max-w-[990px]"
         >
-          <div className="w-full md:w-[600px] border-x-[1px] border-slate-200">
+          <div className="w-full sm:max-w-[600px] border-x-[1px] border-slate-200">
             <Header
               undo={
-                !home && (
+                home || (
                   <IconButton variant="inverse" onClick={router.back}>
                     <ArrowLeftIcon />
                   </IconButton>
@@ -67,7 +67,7 @@ export const MainLayout = ({ children, title, home = false }: Props) => {
             <div className="w-[290px] xl:w-[350px] h-full mr-[10px] bg-slate-100"></div>
           )}
         </main>
-        <div className="md:flex-grow" />
+        <div className="sm:flex-grow" />
       </div>
     </>
   );

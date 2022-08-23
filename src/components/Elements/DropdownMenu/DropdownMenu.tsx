@@ -3,7 +3,7 @@ import {
   Root,
   Content,
   Trigger,
-  DropdownMenuArrow,
+  Arrow,
   Group,
   Item,
   Portal,
@@ -63,7 +63,7 @@ export const DropdownMenu = React.forwardRef<
                   className="rounded-xl bg-white shadow-lg"
                 >
                   {animationType === 'normal' && (
-                    <DropdownMenuArrow className="fill-white" />
+                    <Arrow className="fill-white" />
                   )}
                   {children}
                 </Content>

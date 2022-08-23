@@ -9,12 +9,10 @@ type Props = LinkProps & WithChildren & WithClassName;
 export const Link = React.forwardRef<HTMLAnchorElement, Props>(
   ({ className, children, ...props }, ref) => {
     return (
-      <NextLink
-        className={clsx('text-sky-400, cursor-pointer', className)}
-        {...props}
-        passHref
-      >
-        <a ref={ref}>{children}</a>
+      <NextLink {...props} passHref>
+        <a ref={ref} className={clsx('cursor-pointer', className)}>
+          {children}
+        </a>
       </NextLink>
     );
   },
