@@ -1,1 +1,3 @@
-export const cookieName = 'twitter_clone_fullstack_cookie';
+import { APP_NAME } from '@/config/app';
+
+export const cookieName = APP_NAME + '-cookie';
