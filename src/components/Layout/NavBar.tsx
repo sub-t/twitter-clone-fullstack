@@ -6,18 +6,20 @@ import {
   DotsHorizontalIcon,
   HashtagIcon,
   HomeIcon,
-  KeyIcon,
   MailIcon,
   UserIcon,
   ViewListIcon,
 } from '@heroicons/react/outline';
 import { PencilIcon } from '@heroicons/react/solid';
 import { Slot } from '@radix-ui/react-slot';
-import Image from 'next/image';
+import clsx from 'clsx';
+import { SiTwitter } from 'react-icons/si';
 import { useComposeTweet } from '@/features/tweets/stores/composeTweet';
 import { useBreakpoint } from '@/hooks/useBreakPoint';
 import {
+  Avatar,
   Button,
+  Card,
   DropdownMenu,
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -35,7 +37,6 @@ const list = [
   { icon: <BookmarkIcon />, title: 'Bookmarks' },
   { icon: <ViewListIcon />, title: 'Lists' },
   { icon: <UserIcon />, title: 'Profile' },
-  { icon: <DotsCircleHorizontalIcon />, title: 'More' },
 ];
 
 type Props = {
@@ -48,29 +49,44 @@ export const NavBar = ({ user }: Props) => {
   const sm = useBreakpoint('sm');
 
   return (
-    <div className="overflow-y-auto flex flex-col justify-between items-center 2xl:items-start w-full h-screen px-2">
-      <div className="flex flex-col items-center 2xl:items-start gap-2 ">
-        <IconButton size="lg" variant="primary">
-          <KeyIcon />
-        </IconButton>
+    <div className="overflow-y-auto flex flex-col justify-between items-center 2xl:items-start w-full h-screen sm:px-3">
+      <div className="flex flex-col items-center 2xl:items-startw-full">
+        <div className="flex justify-center items-center w-[56px] h-[56px]">
+          <Link
+            href="/home"
+            className="flex justify-center items-center w-[52px] h-[52px] rounded-full anime hover:bg-sky-50"
+          >
+            <SiTwitter className="w-7 h-7 text-sky-500" />
+          </Link>
+        </div>
         {list
           .filter(
             ({ title }) => sm || !(title === 'Bookmarks' || title === 'Lists'),
           )
-          .map(({ icon, title }) =>
-            xl2 ? (
-              <Button key={title} variant="inverse" size="lg" className="gap-4">
-                <Slot className="w-7 h-7">{icon}</Slot> {title}
-              </Button>
-            ) : (
-              <IconButton key={title} variant="inverse" size="md">
-                {icon}
-              </IconButton>
-            ),
-          )}
-        <Slot onClick={() => open()}>
+          .map(({ icon, title }) => (
+            <Link
+              key={title}
+              href={`${title.toLowerCase()}`}
+              className={clsx(
+                'flex p-3 rounded-full anime hover:bg-slate-200',
+                xl2 && 'w-full',
+              )}
+            >
+              <Slot className="w-7 h-7">{icon}</Slot>
+              {xl2 && (
+                <span className="pl-5 pr-4 text-xl font-normal">{title}</span>
+              )}
+            </Link>
+          ))}
+        {/* TODO */}
+        <Button variant="inverse" size="lg" className="w-full">
+          <DotsCircleHorizontalIcon className="w-7 h-7" />
+          {xl2 && <span className="pl-5 pr-4 text-xl font-normal">More</span>}
+          <div className="flex-grow" />
+        </Button>
+        <Slot onClick={() => open()} className="my-1">
           {xl2 ? (
-            <Button size="lg" className="w-[90%]">
+            <Button size="lg" className={xl2 && 'w-[90%]'}>
               Tweet
             </Button>
           ) : (
@@ -84,79 +100,49 @@ export const NavBar = ({ user }: Props) => {
         <DropdownMenu
           trigger={
             xl2 ? (
-              <Button variant="inverse" size="lg" className="w-full">
-                <div className="mr-3">
-                  <div className="overflow-hidden relative w-10 h-10 rounded-full bg-slate-50">
-                    {user?.profileImageUrl && (
-                      <Image
-                        layout="fill"
-                        objectFit="cover"
-                        src={user.profileImageUrl}
-                        alt="avatar"
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="min-w-0 flex justify-between items-center w-full">
-                  <div className="min-w-0 flex-shrink flex flex-col text-sm">
-                    <span className="text-slate-900 font-bold truncate">
-                      {user?.name}
-                    </span>
-                    <span className="text-start font-normal text-slate-600 truncate">
-                      @{user?.screenName}
-                    </span>
-                  </div>
-
-                  <div className="ml-3">
+              <button className="w-full">
+                <Card
+                  className="rounded-full anime hover:bg-slate-100"
+                  thumbnail={<Avatar src={user?.profileImageUrl} />}
+                  header={
+                    <>
+                      <span className="h-5 text-slate-900 font-bold truncate">
+                        {user?.name}
+                      </span>
+                      <span className="h-5 text-start font-normal text-slate-600 truncate">
+                        @{user?.screenName}
+                      </span>
+                    </>
+                  }
+                  icon={
                     <DotsHorizontalIcon className="flex-shrink-0 w-5 h-5" />
-                  </div>
-                </div>
-              </Button>
+                  }
+                />
+              </button>
             ) : (
               <button className="p-3 anime hover:bg-slate-100 rounded-full">
-                <div className="overflow-hidden relative w-12 h-12 rounded-full bg-slate-50">
-                  {user?.profileImageUrl && (
-                    <Image
-                      layout="fill"
-                      objectFit="cover"
-                      src={user.profileImageUrl}
-                      alt="avatar"
-                    />
-                  )}
-                </div>
+                <Avatar src={user?.profileImageUrl} />
               </button>
             )
           }
         >
           <DropdownMenuGroup className="w-[300px] py-3">
-            <div className="flex items-center w-full h-[84px] p-4">
-              <div className="mr-3">
-                <div className="overflow-hidden relative w-12 h-12 rounded-full bg-slate-50">
-                  {user?.profileImageUrl && (
-                    <Image
-                      layout="fill"
-                      objectFit="cover"
-                      src={user.profileImageUrl}
-                      alt="avatar"
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="min-w-0 flex justify-between w-full">
-                <div className="min-w-0 flex-shrink flex flex-col text-sm">
-                  <span className="text-slate-900 font-bold truncate">
+            <Card
+              thumbnail={<Avatar src={user?.profileImageUrl} />}
+              header={
+                <>
+                  <span className="h-5 text-slate-900 font-bold truncate">
                     {user?.name}
                   </span>
-                  <span className="text-start font-normal text-slate-600 truncate">
+                  <span className="h-5 text-start font-normal text-slate-600 truncate">
                     @{user?.screenName}
                   </span>
-                </div>
-
-                <div className="ml-3">
-                  <CheckIcon className="flex-shrink-0 w-5 h-5 text-sky-500" />
-                </div>
-              </div>
-            </div>
+                </>
+              }
+              icon={
+                <CheckIcon className="flex-shrink-0 w-5 h-5 text-sky-500" />
+              }
+            />
             <Spacer thin />
             <DropdownMenuItem asChild>
               <Link href="/i/flow/login">
