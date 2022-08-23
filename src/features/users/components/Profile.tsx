@@ -3,8 +3,7 @@ import {
   CalendarIcon,
   DotsHorizontalIcon,
 } from '@heroicons/react/outline';
-import Image from 'next/image';
-import { IconButton } from '@/components/Elements';
+import { Avatar, FallbackImage, IconButton } from '@/components/Elements';
 import { useAuth } from '@/features/auth';
 import { Follow, Unfollow } from '@/features/follows';
 import { formatDate } from '@/utils/formatDate';
@@ -21,30 +20,19 @@ export const Profile = ({ user }: Props) => {
 
   return (
     <div className="bg-white">
-      <div className="overflow-hidden relative h-[200px] bg-slate-200">
-        {user?.profileBannerUrl && (
-          <Image
-            layout="fill"
-            objectFit="cover"
-            src={user.profileBannerUrl}
-            alt="avatar"
-          />
-        )}
-      </div>
+      <FallbackImage
+        src={user.profileBannerUrl}
+        className="relative w-full pb-[33.3333%]"
+      />
 
       <div className="px-4 pt-3 mb-4">
         <div className="flex justify-between h-20">
           <div className="w-1/4 min-w-[48px] -mt-[15%] mb-12">
-            <div className="box-content relative overflow-hidden w-full pb-[100%] bg-slate-300 border-4 rounded-full border-white">
-              {user?.profileImageUrl && (
-                <Image
-                  layout="fill"
-                  objectFit="cover"
-                  src={user.profileImageUrl}
-                  alt="avatar"
-                />
-              )}
-            </div>
+            <Avatar
+              src={user.profileImageUrl}
+              size="full"
+              className="box-content pb-[100%] border-4 border-white"
+            />
           </div>
           {authUser?.id === id ? (
             <EditProfile />
