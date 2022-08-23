@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Spacer } from '@/components/Elements';
-import { Card } from './Card';
+import { TweetCard } from './TweetCard';
 import type { Tweet } from '../types';
 
 type Props = {
@@ -22,7 +22,7 @@ export const Tweets = ({ data }: Props) => {
               opacity: 0,
             }}
           >
-            <Card data={tweet} />
+            <TweetCard data={tweet} />
             <Spacer thin />
           </motion.div>
         ))}

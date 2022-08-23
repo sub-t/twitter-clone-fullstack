@@ -1,8 +1,8 @@
 import { Link } from '@/components/Elements';
 import { FormDialog } from '@/components/Form/FormDialog';
 import { useComposeTweet } from '../stores/composeTweet';
-import { Card } from './Card';
 import { CreateTweet } from './CreateTweet';
+import { TweetCard } from './TweetCard';
 
 export const ComposeTweet = () => {
   const { isOpen, close, config } = useComposeTweet();
@@ -12,7 +12,7 @@ export const ComposeTweet = () => {
     <FormDialog isOpen={isOpen} close={close} className="sm:top-9">
       {data && (
         <>
-          <Card data={data} reply={!!data.id} />
+          <TweetCard data={data} reply={!!data.id} />
 
           <div className="flex px-4">
             <div className="flex justify-center w-12 h-10 mr-3">
@@ -20,7 +20,7 @@ export const ComposeTweet = () => {
             </div>
             <div className="pt-1 pb-4 text-slate-500">
               Replying to{' '}
-              <Link href={`/${data.user.id}`}>
+              <Link href={`/${data.user.id}`} className="text-sky-500">
                 @{data.user.id}
               </Link>
             </div>
