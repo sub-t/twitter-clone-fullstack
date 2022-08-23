@@ -4,6 +4,7 @@ export * from './Button';
 export * from './Card';
 export * from './DropdownMenu';
 export * from './IconButton';
+export * from './FallbackImage';
 export * from './Link';
 export * from './Motion';
 export * from './Spacer';
