@@ -12,5 +12,5 @@ export type GetUserDTO = {
 };
 
 export type UpdateProfileDTO = {
-  data: Pick<User, 'name' | 'description'>;
+  data: Pick<User, 'name' | 'description' | 'location' | 'url'>;
 };
