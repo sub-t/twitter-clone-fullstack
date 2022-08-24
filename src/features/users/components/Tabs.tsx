@@ -42,6 +42,6 @@ export const Tabs = ({ userId }: Props) => {
 };
 
 const isMatch = (pathname: string, path: string) => {
-  const currentPath = pathname.split('/').pop();
+  const currentPath = pathname.slice().split('/').pop();
   return currentPath === path || (currentPath === '[userId]' && path === '');
 };
