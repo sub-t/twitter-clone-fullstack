@@ -79,7 +79,7 @@ export const NavBar = ({ user }: Props) => {
             </Link>
           ))}
         {/* TODO */}
-        <Button variant="inverse" size="lg" className="w-full">
+        <Button variant="inverse" size="lg" className={clsx(xl2 && 'w-full')}>
           <DotsCircleHorizontalIcon className="w-7 h-7" />
           {xl2 && <span className="pl-5 pr-4 text-xl font-normal">More</span>}
           <div className="flex-grow" />

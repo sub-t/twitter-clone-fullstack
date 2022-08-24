@@ -43,7 +43,7 @@ export const MainLayout = ({ children, title, home = false }: Props) => {
           role="main"
           className="min-w-0 flex-grow flex justify-between lg:max-w-[920px] xl:max-w-[990px]"
         >
-          <div className="w-full sm:max-w-[600px] border-x-[1px] border-slate-200">
+          <div className="w-full sm:w-[600px] border-x-[1px] border-slate-200">
             <Header
               undo={
                 home || (

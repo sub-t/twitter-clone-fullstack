@@ -10,7 +10,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <NextLink {...props} passHref>
-        <a ref={ref} className={clsx('cursor-pointer', className)}>
+        <a ref={ref} className={clsx('cursor-pointer hover:underline', className)}>
           {children}
         </a>
       </NextLink>

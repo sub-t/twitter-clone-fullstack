@@ -4,8 +4,8 @@ import clsx from 'clsx';
 const variants = {
   primary: 'bg-sky-500 text-white',
   secondary: 'bg-black text-white',
-  inverse: 'hover:bg-slate-100',
-  outline: 'hover:bg-slate-100 border-[1px] border-slate-300',
+  inverse: 'hover:bg-slate-200',
+  outline: 'hover:bg-slate-200 border-[1px] border-slate-300',
   danger: 'bg-red-600 text-white hover:bg-red-50:text-red-600',
 };
 
