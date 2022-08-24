@@ -10,6 +10,8 @@ import type { UpdateProfileDTO } from '../types';
 const schema = zod.object({
   name: zod.string().min(1, 'Required'),
   description: zod.string(),
+  location: zod.string(),
+  url: zod.string(),
 });
 
 export const EditProfile = () => {
@@ -65,6 +67,8 @@ export const EditProfile = () => {
             defaultValues: {
               name: user?.name,
               description: user?.description,
+              location: user?.location,
+              url: user?.url,
             },
           }}
           className="flex flex-col gap-3"
@@ -73,10 +77,12 @@ export const EditProfile = () => {
             <div className="px-4 py-3 space-y-6">
               <InputField label="Name" registration={register('name')} />
               {/* TODO Input -> TextArea */}
+              <InputField label="Bio" registration={register('description')} />
               <InputField
-                label="description"
-                registration={register('description')}
+                label="Location"
+                registration={register('location')}
               />
+              <InputField label="Website" registration={register('url')} />
             </div>
           )}
         </Form>
