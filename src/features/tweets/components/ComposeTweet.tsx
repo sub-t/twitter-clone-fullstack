@@ -20,8 +20,8 @@ export const ComposeTweet = () => {
             </div>
             <div className="pt-1 pb-4 text-slate-500">
               Replying to{' '}
-              <Link href={`/${data.user.id}`} className="text-sky-500">
-                @{data.user.id}
+              <Link href={`/${data.user.screenName}`} className="text-sky-500">
+                @{data.user.screenName}
               </Link>
             </div>
           </div>
