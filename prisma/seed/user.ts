@@ -16,6 +16,8 @@ export const user = async () => {
             email: faker.internet.email(),
             name: faker.name.fullName(),
             screenName: faker.internet.userName(),
+            location: faker.address.country(),
+            url: faker.internet.url(),
             password,
             description: faker.lorem.paragraph(),
             profileBannerUrl: faker.image.imageUrl(
