@@ -21,13 +21,13 @@ export const Card = ({
   thread = false,
 }: Props) => {
   return (
-    <div className={clsx('w-full space-y-3 px-4 py-3 bg-white', className)}>
+    <div className={clsx('w-full px-4 py-3 bg-white', className)}>
       <div className="min-w-0 flex">
         <div className="flex-shrink-0 flex flex-col items-center gap-1 w-12 mr-3">
           {thumbnail}
         </div>
 
-        <div className="min-w-0 space-y-3 w-full">
+        <div className="min-w-0 w-full">
           {header && (
             <div className="min-w-0 flex justify-between">
               <div className="min-w-0 flex-shrink flex flex-col">{header}</div>
