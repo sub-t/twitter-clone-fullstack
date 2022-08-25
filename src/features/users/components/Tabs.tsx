@@ -9,17 +9,17 @@ const list = [
 ];
 
 type Props = {
-  userId: string;
+  screenName: string;
 };
 
-export const Tabs = ({ userId }: Props) => {
+export const Tabs = ({ screenName }: Props) => {
   const router = useRouter();
   const { pathname } = router;
 
   return (
     <div role="tablist" className="w-full flex">
       {list.map(({ title, path }) => {
-        const link = `/${userId}/${path}`;
+        const link = `/${screenName}/${path}`;
 
         return (
           <button
@@ -43,5 +43,7 @@ export const Tabs = ({ userId }: Props) => {
 
 const isMatch = (pathname: string, path: string) => {
   const currentPath = pathname.slice().split('/').pop();
-  return currentPath === path || (currentPath === '[userId]' && path === '');
+  return (
+    currentPath === path || (currentPath === '[screenName]' && path === '')
+  );
 };

@@ -3,21 +3,21 @@ import { apiClient } from '@/lib/axios';
 import type { GetUserDTO, User } from '../types';
 import type { QueryConfig, ExtractFnReturnType } from '@/lib/react-query';
 
-export const getUser = ({ userId }: GetUserDTO): Promise<User> => {
-  return apiClient.get(`/users/${userId}`);
+export const getUser = ({ screenName }: GetUserDTO): Promise<User> => {
+  return apiClient.get(`/users/${screenName}`);
 };
 
 type QueryFnType = typeof getUser;
 
 type UseUsersOptions = {
-  userId: string;
+  screenName: string;
   config?: QueryConfig<QueryFnType>;
 };
 
-export const useUser = ({ userId, config }: UseUsersOptions) => {
+export const useUser = ({ screenName, config }: UseUsersOptions) => {
   return useQuery<ExtractFnReturnType<QueryFnType>>({
     ...config,
-    queryKey: ['users', userId],
-    queryFn: () => getUser({ userId }),
+    queryKey: ['users', screenName],
+    queryFn: () => getUser({ screenName }),
   });
 };

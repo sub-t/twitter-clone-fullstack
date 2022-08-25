@@ -7,8 +7,13 @@ export type User = Omit<BEUser, 'password'> & {
   followed: boolean;
 };
 
+export type UsersResponse = {
+  screenName: string;
+  tweetIds: string[];
+}[];
+
 export type GetUserDTO = {
-  userId: string;
+  screenName: string;
 };
 
 export type UpdateProfileDTO = {

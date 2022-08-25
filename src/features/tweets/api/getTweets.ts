@@ -4,13 +4,13 @@ import type { GetTweetsDTO, Tweet } from '../types';
 import type { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 
 export const getTweets = ({
-  userId,
+  screenName,
   withReplies,
 }: GetTweetsDTO): Promise<Tweet[]> => {
   if (withReplies) {
-    return apiClient.get(`/users/${userId}/tweets/withReplies`);
+    return apiClient.get(`/users/${screenName}/tweets/withReplies`);
   }
-  return apiClient.get(`/users/${userId}/tweets`);
+  return apiClient.get(`/users/${screenName}/tweets`);
 };
 
 type QueryFnType = typeof getTweets;
@@ -25,7 +25,7 @@ export const useTweets = ({ data, config }: UseTweetsOptions) => {
     ...config,
     queryKey: [
       'users',
-      data.userId,
+      data.screenName,
       'tweets',
       ...(data?.withReplies ? ['withReplies'] : []),
     ],

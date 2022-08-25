@@ -6,7 +6,7 @@ import { getUserResponse } from '../utils/getUserResponse';
 const getUsersFn: NextApiHandler = async (req, res) => {
   try {
     const authUserId = req.session.user?.id;
-    const screenName = req.query.id as string;
+    const screenName = req.query.screenName as string;
 
     if (screenName) {
       const user = await prisma.user.findUnique({
@@ -31,16 +31,16 @@ const getUsersFn: NextApiHandler = async (req, res) => {
 
     const users = await prisma.user.findMany({
       include: {
-        followers: true,
-        friends: true,
-        favorites: true,
+        tweets: true,
       },
     });
-    const userResponses = users.map((user) =>
-      getUserResponse(user, authUserId),
-    );
 
-    return res.status(200).json(userResponses);
+    const usersResponse = users.map((user) => ({
+      screenName: user.screenName,
+      tweetIds: user.tweets.map((tweet) => tweet.id),
+    }));
+
+    return res.status(200).json(usersResponse);
   } catch (error: any) {
     if (error?.message) {
       return res.status(400).json({ message: error.message });

@@ -37,10 +37,10 @@ const getTweetFn: NextApiHandler = async (req, res) => {
 const getTweetsByUserFn: NextApiHandler = async (req, res) => {
   try {
     const authUserId = req.session.user?.id;
-    const id = req.query.id as string;
+    const screenName = req.query.screenName as string;
 
     const user = await prisma.user.findUnique({
-      where: { screenName: id },
+      where: { screenName },
       include: {
         tweets: {
           where: {
@@ -75,10 +75,10 @@ const getTweetsByUserFn: NextApiHandler = async (req, res) => {
 const getTweetsByUserWithRepliesFn: NextApiHandler = async (req, res) => {
   try {
     const authUserId = req.session.user?.id;
-    const id = req.query.id as string;
+    const screenName = req.query.screenName as string;
 
     const user = await prisma.user.findUnique({
-      where: { screenName: id },
+      where: { screenName },
       include: {
         tweets: {
           include: {

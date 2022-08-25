@@ -13,7 +13,7 @@ export type GetTweetDTO = {
 };
 
 export type GetTweetsDTO = {
-  userId: string;
+  screenName: string;
   withReplies?: boolean;
 };
 

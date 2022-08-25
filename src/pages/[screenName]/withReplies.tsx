@@ -14,30 +14,38 @@ import type { User } from '@/features/users';
 import type { ParsedUrlQuery } from 'querystring';
 
 type Props = {
-  userId: string;
+  screenName: string;
 };
 
 type Params = ParsedUrlQuery & {
-  userId: string;
+  screenName: string;
 };
 
 const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  userId,
+  screenName,
 }) => {
-  const { data: user } = useUser({ userId });
-  const { data: tweets } = useTweets({ data: { userId } });
+  const { data: user } = useUser({ screenName });
+  const { data: tweets } = useTweets({
+    data: { screenName, withReplies: true },
+  });
+
+  if (!user || !tweets) {
+    return <Loading />;
+  }
 
   return (
-    <div className="space-y-3">
-      {user && (
-        <MainLayout title={user.name}>
-          <UserSeo user={user} />
-          <Profile user={user} />
-          <Tabs userId={user.screenName} />
-          {tweets ? <Tweets data={tweets} /> : <Loading />}
-        </MainLayout>
-      )}
-    </div>
+    <>
+      <UserSeo user={user} />
+      <div className="space-y-3">
+        {user && (
+          <MainLayout title={user.name}>
+            <Profile user={user} />
+            <Tabs screenName={user.screenName} />
+            <Tweets data={tweets} />
+          </MainLayout>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -48,7 +56,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
     data.json(),
   )) as User[];
   const paths = users.map((user) => ({
-    params: { userId: user.screenName },
+    params: { screenName: user.screenName },
   }));
 
   return { paths, fallback: false };
@@ -57,11 +65,11 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const { userId } = params as Params;
+  const { screenName } = params as Params;
 
   return {
     props: {
-      userId,
+      screenName,
     },
   };
 };
