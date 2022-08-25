@@ -45,6 +45,7 @@ export const EditProfile = () => {
       >
         <FallbackImage
           src={user?.profileBannerUrl}
+          alt="profile banner"
           className="h-[33vw] sm:h-[200px] border-white border-2 bg-slate-200"
         />
         <div className="-mt-[45px] ml-[15px]">

@@ -24,6 +24,7 @@ export const Profile = ({ user }: Props) => {
     <div className="bg-white">
       <FallbackImage
         src={user.profileBannerUrl}
+        alt="profile banner"
         className="relative w-full pb-[33.3333%]"
       />
 

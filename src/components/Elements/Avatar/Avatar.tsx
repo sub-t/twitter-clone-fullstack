@@ -18,6 +18,7 @@ export const Avatar = ({ src, size = 'sm', className }: Props) => {
     <>
       <FallbackImage
         src={src}
+        alt="avatar"
         className={clsx('overflow-hidden rounded-full', sizes[size], className)}
       />
     </>
