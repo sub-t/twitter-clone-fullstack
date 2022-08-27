@@ -30,9 +30,9 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     <div className="space-y-3">
       {user && (
         <MainLayout title={user.name}>
-          <UserSeo user={user} />
-          <Profile user={user} />
-          <Tabs screenName={user.screenName} />
+          <UserSeo data={user} />
+          <Profile data={user} />
+          <Tabs data={user} />
           {tweets ? <Tweets data={tweets} /> : <Loading />}
         </MainLayout>
       )}

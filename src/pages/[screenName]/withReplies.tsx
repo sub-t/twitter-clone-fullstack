@@ -34,12 +34,12 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 
   return (
     <>
-      <UserSeo user={user} />
+      <UserSeo data={user} />
       <div className="space-y-3">
         {user && (
           <MainLayout title={user.name}>
-            <Profile user={user} />
-            <Tabs screenName={user.screenName} />
+            <Profile data={user} />
+            <Tabs data={user} />
             <Tweets data={tweets} />
           </MainLayout>
         )}

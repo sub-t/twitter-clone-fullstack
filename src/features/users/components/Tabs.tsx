@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
+import type { User } from '@prisma/client';
 
 const list = [
   { title: 'Tweets', path: '' },
@@ -9,17 +10,17 @@ const list = [
 ];
 
 type Props = {
-  screenName: string;
+  data: Pick<User, 'screenName'>;
 };
 
-export const Tabs = ({ screenName }: Props) => {
+export const Tabs = ({ data }: Props) => {
   const router = useRouter();
   const { pathname } = router;
 
   return (
     <div role="tablist" className="w-full flex">
       {list.map(({ title, path }) => {
-        const link = `/${screenName}/${path}`;
+        const link = `/${data.screenName}/${path}`;
 
         return (
           <button

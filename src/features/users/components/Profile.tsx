@@ -14,16 +14,16 @@ import { EditProfile } from './EditProfile';
 import type { User } from '../types';
 
 type Props = {
-  user: User;
+  data: User;
 };
 
-export const Profile = ({ user }: Props) => {
+export const Profile = ({ data }: Props) => {
   const { user: authUser } = useAuth();
 
   return (
     <div className="bg-white">
       <FallbackImage
-        src={user.profileBannerUrl}
+        src={data.profileBannerUrl}
         alt="profile banner"
         className="relative w-full pb-[33.3333%]"
       />
@@ -32,12 +32,12 @@ export const Profile = ({ user }: Props) => {
         <div className="flex justify-between h-20">
           <div className="w-1/4 min-w-[48px] -mt-[15%] mb-12">
             <Avatar
-              src={user.profileImageUrl}
+              src={data.profileImageUrl}
               size="full"
               className="box-content pb-[100%] border-4 border-white"
             />
           </div>
-          {authUser?.id === user.id ? (
+          {authUser?.id === data.id ? (
             <EditProfile />
           ) : (
             <div className="flex items-start gap-3">
@@ -47,10 +47,10 @@ export const Profile = ({ user }: Props) => {
               <IconButton variant="outline">
                 <BellIcon />
               </IconButton>
-              {user.followed ? (
-                <Unfollow data={{ id: user.id, screenName: user.screenName }} />
+              {data.followed ? (
+                <Unfollow data={data} />
               ) : (
-                <Follow data={{ id: user.id, screenName: user.screenName }} />
+                <Follow data={data} />
               )}
             </div>
           )}
@@ -58,45 +58,44 @@ export const Profile = ({ user }: Props) => {
         <div className="flex flex-col gap-4">
           <div>
             <div className="text-slate-800 dark:text-white text-xl font-extrabold break-words">
-              {user.name}
+              {data.name}
             </div>
-            <div className="text-slate-500">{`@${user.screenName}`}</div>
+            <div className="text-slate-500">{`@${data.screenName}`}</div>
           </div>
-          {user.description && (
-            <div className="text-slate-700">{user.description}</div>
+          {data.description && (
+            <div className="text-slate-700">{data.description}</div>
           )}
           <div className="flex flex-wrap items-center gap-3 text-slate-500">
-            {user.location && (
+            {data.location && (
               <span className="flex gap-1">
                 <LocationMarkerIcon className="w-5 h-5" />
-                <span>{user.location}</span>
+                <span>{data.location}</span>
               </span>
             )}
-            {user.url && (
+            {data.url && (
               <span className="flex gap-1">
                 <LinkIcon className="w-5 h-5" />
-                <a href={user.url} className="text-sky-500">
-                  {new URL(user.url).hostname}
+                <a href={data.url} className="text-sky-500">
+                  {new URL(data.url).hostname}
                 </a>
               </span>
             )}
             <span className="flex gap-1">
               <CalendarIcon className="w-5 h-5" />
-              <span>Joined {formatDate(user.createdAt)}</span>
+              <span>Joined {formatDate(data.createdAt)}</span>
             </span>
           </div>
           <div className="flex gap-3 text-slate-500">
-            {/* TODO */}
-            <Link href={`/${user.screenName}/following`} className="flex">
+            <Link href={`/${data.screenName}/following`}>
               <span className="text-slate-900 font-bold">
-                {formatNumber(user.friendsCount)}
-              </span>
+                {formatNumber(data.friendsCount)}
+              </span>{' '}
               <span>Following</span>
             </Link>
-            <Link href={`/${user.screenName}/followers`} className="flex">
+            <Link href={`/${data.screenName}/followers`}>
               <span className=" text-slate-900 font-bold">
-                {formatNumber(user.followersCount)}
-              </span>
+                {formatNumber(data.followersCount)}
+              </span>{' '}
               <span>Followers</span>
             </Link>
           </div>
