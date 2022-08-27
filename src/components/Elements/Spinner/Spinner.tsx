@@ -3,7 +3,7 @@ import type { WithClassName } from '@/types';
 
 const variants = {
   light: 'text-white',
-  primary: 'text-sky-600',
+  primary: 'text-sky-500',
 };
 
 export type SpinnerProps = {
