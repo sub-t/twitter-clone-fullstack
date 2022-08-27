@@ -20,7 +20,7 @@ const getTweetFn: NextApiHandler = async (req, res) => {
     });
 
     if (!tweet) {
-      throw Error("This tweet doesn't exist");
+      return res.status(404).json({ message: "This tweet doesn't exist" });
     }
 
     const tweetResponse = getTWeetResponse(tweet, authUserId);
