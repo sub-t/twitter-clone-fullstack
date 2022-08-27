@@ -31,7 +31,6 @@ type Props = {
   thread?: boolean;
 };
 
-// TODO
 export const TweetCard = ({ data, reply = false, thread = false }: Props) => {
   const user = data.user;
   const router = useRouter();
@@ -128,23 +127,20 @@ export const TweetCard = ({ data, reply = false, thread = false }: Props) => {
         }
         buttons={
           <>
-            {thread && (
+            {thread && !!data.favoriteCount && (
               <>
                 <Spacer thin />
                 <div className="px-1 py-4">
-                  <Link
-                    href={`/${user.screenName}/status/${data.id}/likes`}
-                    className="flex"
-                  >
+                  <Link href={`/${user.screenName}/status/${data.id}/likes`}>
                     <span className=" text-slate-900 font-bold">
                       {formatNumber(data.favoriteCount)}
-                    </span>
+                    </span>{' '}
                     <span>Likes</span>
                   </Link>
                 </div>
-                <Spacer thin />
               </>
             )}
+            <Spacer thin />
             <div
               className={clsx(
                 'min-w-0 flex',
