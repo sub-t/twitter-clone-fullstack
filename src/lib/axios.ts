@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useNotificationStore } from '@/stores/notifications';
 
 export const apiClient = axios.create({
   baseURL: '/api',
@@ -28,13 +27,6 @@ apiClient.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    const message = error.response?.data?.message || error.message;
-    useNotificationStore.getState().addNotification({
-      type: 'error',
-      title: 'Error',
-      message,
-    });
-
     return Promise.reject(error);
   },
 );
