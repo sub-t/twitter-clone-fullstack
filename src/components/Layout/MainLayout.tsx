@@ -1,5 +1,6 @@
 import { ArrowLeftIcon, SparklesIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+import { SiTwitter } from 'react-icons/si';
 import { useAuth } from '@/features/auth';
 import { ComposeTweet } from '@/features/tweets/components/ComposeTweet';
 import { DeleteTweet } from '@/features/tweets/components/DeleteTweet';
@@ -17,10 +18,14 @@ type Props = {
 export const MainLayout = ({ children, title, home = false }: Props) => {
   const lg = useBreakpoint('lg');
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
 
-  if (home && !user) {
-    router.replace('/');
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center w-screen h-screen">
+        <SiTwitter size={64} className="fill-sky-500" />
+      </div>
+    );
   }
 
   return (

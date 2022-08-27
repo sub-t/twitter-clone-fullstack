@@ -33,9 +33,18 @@ const AuthLoader = ({ children }: WithChildren) => {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center w-screen h-screen">
-        <SiTwitter size={64} className="fill-sky-500" />
-      </div>
+      <noscript>
+        <div style={{ padding: '10%' }}>
+          <SiTwitter size={48} style={{ fill: '#0ea5e9' }} />
+          <h1>JavaScript is not available.</h1>
+          <p>
+            We’ve detected that JavaScript is disabled in this browser. Please
+            enable JavaScript or switch to a supported browser to continue using
+            twitter.com. You can see a list of supported browsers in our Help
+            Center.
+          </p>
+        </div>
+      </noscript>
     );
   }
 
