@@ -4,6 +4,7 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
+import { NextSeo } from 'next-seo';
 import { prisma } from '@/api/lib/prisma';
 import { Spacer } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
@@ -14,14 +15,17 @@ import type { ParsedUrlQuery } from 'querystring';
 
 type Props = {
   tweetId: string;
+  data: { username: string };
 };
 
 type Params = ParsedUrlQuery & {
   tweetId: string;
+  screenName: string;
 };
 
 const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   tweetId,
+  data: { username },
 }) => {
   const { data } = useTweet({ data: { tweetId } });
 
@@ -30,11 +34,14 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   }
 
   return (
-    <MainLayout title="Thread">
-      <TweetCard data={data} thread />
-      <CreateTweet tweetId={data.id} />
-      <Spacer />
-    </MainLayout>
+    <>
+      <NextSeo title={`${username} on Twitter: "${data.text}"`} />
+      <MainLayout title="Thread">
+        <TweetCard data={data} thread />
+        <CreateTweet tweetId={data.id} />
+        <Spacer />
+      </MainLayout>
+    </>
   );
 };
 
@@ -58,11 +65,18 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const { tweetId } = params as Params;
+  const { tweetId, screenName } = params as Params;
+
+  const user = await prisma.user.findUnique({
+    where: {
+      screenName,
+    },
+  });
 
   return {
     props: {
       tweetId,
+      data: { username: user!.name },
     },
   };
 };
