@@ -1,82 +1,59 @@
-import type {
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetStaticPropsType,
-  NextPage,
-} from 'next';
+import type { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
-import { prisma } from '@/api/lib/prisma';
-import { Spacer } from '@/components/Elements';
+import { useRouter } from 'next/router';
+import { Link, Spacer } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
-import { Loading } from '@/features/misc';
 import { CreateTweet, useTweet } from '@/features/tweets';
 import { TweetCard } from '@/features/tweets/components/TweetCard';
-import type { ParsedUrlQuery } from 'querystring';
+import { useNotificationStore } from '@/stores/notifications';
 
-type Props = {
-  tweetId: string;
-  data: { username: string };
-};
+const Page: NextPage = () => {
+  const router = useRouter();
+  const { addNotification } = useNotificationStore();
 
-type Params = ParsedUrlQuery & {
-  tweetId: string;
-  screenName: string;
-};
+  const tweetId = router.query.tweetId as string;
+  const { data, isError } = useTweet({
+    data: { tweetId },
+    config: {
+      enabled: !!tweetId,
+      onError: () =>
+        addNotification({
+          title: 'Sorry, that Tweet has been deleted.',
+        }),
+    },
+  });
 
-const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
-  tweetId,
-  data: { username },
-}) => {
-  const { data } = useTweet({ data: { tweetId } });
+  return isError ? (
+    <MainLayout title={'Tweet'}>
+      <NextSeo title="Tweet / Twitter" />
 
-  if (!data) {
-    return <Loading />;
-  }
+      <div className="px-3 py-10">
+        <div className="flex flex-col items-center px-3 py-5 mt-10">
+          <span className="mb-7 text-slate-500">
+            Hmm...this page doesn’t exist. Try searching for something else.
+          </span>
+          <Link
+            href="/search"
+            className="px-4 py-2 rounded-full font-bold outline-0 bg-sky-500 text-white hover:no-underline"
+          >
+            Search
+          </Link>
+        </div>
+      </div>
+    </MainLayout>
+  ) : (
+    <MainLayout title="Tweet">
+      {data && (
+        <>
+          <NextSeo title={`${data.user.name} on Twitter: "${data.text}"`} />
 
-  return (
-    <>
-      <NextSeo title={`${username} on Twitter: "${data.text}"`} />
-      <MainLayout title="Thread">
-        <TweetCard data={data} thread />
-        <CreateTweet tweetId={data.id} />
-        <Spacer />
-      </MainLayout>
-    </>
+          <TweetCard data={data} thread />
+          <CreateTweet tweetId={data.id} />
+          <Spacer />
+        </>
+      )}
+    </MainLayout>
   );
 };
 
 export default Page;
-
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const users = await prisma.user.findMany({
-    include: {
-      tweets: true,
-    },
-  });
-
-  return {
-    paths: users.flatMap(({ screenName, tweets }) =>
-      tweets.map((tweet) => ({ params: { screenName, tweetId: tweet.id } })),
-    ),
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params,
-}) => {
-  const { tweetId, screenName } = params as Params;
-
-  const user = await prisma.user.findUnique({
-    where: {
-      screenName,
-    },
-  });
-
-  return {
-    props: {
-      tweetId,
-      data: { username: user!.name },
-    },
-  };
-};
