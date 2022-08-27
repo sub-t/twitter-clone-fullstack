@@ -9,7 +9,7 @@ type Props = {
 
 export const Tweets = ({ data }: Props) => {
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false} >
       {data &&
         data.map((tweet, index) => (
           <motion.div
