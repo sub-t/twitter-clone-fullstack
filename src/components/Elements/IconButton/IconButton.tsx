@@ -23,7 +23,6 @@ const iconSizes = {
   lg: 'w-7 h-7',
 };
 
-
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: keyof typeof variants;
   size?: keyof typeof sizes;
