@@ -35,7 +35,6 @@ export const useMutationOnSuccess = <
       queryClient.invalidateQueries(mutationKey);
       config?.successMessage &&
         addNotification({
-          type: 'success',
           title: config.successMessage,
         });
       config?.onSuccess?.();
