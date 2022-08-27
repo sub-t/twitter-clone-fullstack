@@ -6,7 +6,7 @@ import { SiTwitter } from 'react-icons/si';
 import { Button } from '@/components/Elements';
 import { Notifications } from '@/components/Notifications';
 import { useAuth } from '@/features/auth';
-import { Seo } from '@/features/misc/components/Seo';
+import { Seo } from '@/features/misc';
 import { queryClient } from '@/lib/react-query';
 import type { WithChildren } from '@/types';
 
