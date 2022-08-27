@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Link } from '@/components/Elements';
+import type { WithChildren } from '@/types';
 
-type LayoutProps = {
-  children: React.ReactNode;
+type Props = WithChildren & {
   title: string;
 };
 
-export const Layout = ({ children, title }: LayoutProps) => {
+export const Layout = ({ children, title }: Props) => {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
