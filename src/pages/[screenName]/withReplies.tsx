@@ -4,13 +4,12 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
+import { prisma } from '@/api/lib/prisma';
 import { MainLayout } from '@/components/Layout';
-import { API_URL } from '@/config/app';
 import { Loading } from '@/features/misc';
 import { Tweets, useTweets } from '@/features/tweets';
 import { useUser, Profile, Tabs } from '@/features/users';
 import { UserSeo } from '@/features/users/components/UserSeo';
-import type { User } from '@/features/users';
 import type { ParsedUrlQuery } from 'querystring';
 
 type Props = {
@@ -52,14 +51,14 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default Page;
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const users = (await fetch(`${API_URL}/api/users`).then((data) =>
-    data.json(),
-  )) as User[];
-  const paths = users.map((user) => ({
-    params: { screenName: user.screenName },
-  }));
+  const users = await prisma.user.findMany();
 
-  return { paths, fallback: false };
+  return {
+    paths: users.map((user) => ({
+      params: { screenName: user.screenName },
+    })),
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({

@@ -4,13 +4,12 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next';
+import { prisma } from '@/api/lib/prisma';
 import { Spacer } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
-import { API_URL } from '@/config/app';
 import { Loading } from '@/features/misc';
 import { CreateTweet, useTweet } from '@/features/tweets';
 import { TweetCard } from '@/features/tweets/components/TweetCard';
-import type { UsersResponse } from '@/features/users';
 import type { ParsedUrlQuery } from 'querystring';
 
 type Props = {
@@ -42,14 +41,18 @@ const Page: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
 export default Page;
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const usersResponse = (await fetch(`${API_URL}/api/users`).then((data) =>
-    data.json(),
-  )) as UsersResponse;
+  const users = await prisma.user.findMany({
+    include: {
+      tweets: true,
+    },
+  });
 
-  const paths = usersResponse.flatMap(({ screenName, tweetIds }) =>
-    tweetIds.map((tweetId) => ({ params: { screenName, tweetId } })),
-  );
-  return { paths, fallback: false };
+  return {
+    paths: users.flatMap(({ screenName, tweets }) =>
+      tweets.map((tweet) => ({ params: { screenName, tweetId: tweet.id } })),
+    ),
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
