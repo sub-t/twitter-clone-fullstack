@@ -14,7 +14,13 @@ const getTweetFn: NextApiHandler = async (req, res) => {
       where: { id },
       include: {
         user: true,
-        replies: true,
+        replies: {
+          include: {
+            user: true,
+            replies: true,
+            favorites: true,
+          },
+        },
         favorites: true,
       },
     });
@@ -24,8 +30,11 @@ const getTweetFn: NextApiHandler = async (req, res) => {
     }
 
     const tweetResponse = getTWeetResponse(tweet, authUserId);
+    const replies = tweet.replies.map((reply) =>
+      getTWeetResponse(reply, authUserId),
+    );
 
-    return res.status(200).json(tweetResponse);
+    return res.status(200).json({ tweet: tweetResponse, replies });
   } catch (error: any) {
     if (error?.message) {
       return res.status(400).json({ message: error.message });

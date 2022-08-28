@@ -3,7 +3,9 @@ import { apiClient } from '@/lib/axios';
 import type { GetTweetDTO, Tweet } from '../types';
 import type { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 
-export const getTweet = ({ tweetId }: GetTweetDTO): Promise<Tweet> => {
+export const getTweet = ({
+  tweetId,
+}: GetTweetDTO): Promise<{ tweet: Tweet; replies: Tweet[] }> => {
   return apiClient.get(`/tweets/${tweetId}`);
 };
 

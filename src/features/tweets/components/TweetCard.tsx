@@ -138,9 +138,9 @@ export const TweetCard = ({ data, reply = false, thread = false }: Props) => {
                     <span>Likes</span>
                   </Link>
                 </div>
+                <Spacer thin />
               </>
             )}
-            <Spacer thin />
             <div
               className={clsx(
                 'min-w-0 flex',

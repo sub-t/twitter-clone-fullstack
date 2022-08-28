@@ -3,7 +3,7 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import { Link, Spacer } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
-import { CreateTweet, useTweet } from '@/features/tweets';
+import { CreateTweet, Tweets, useTweet } from '@/features/tweets';
 import { TweetCard } from '@/features/tweets/components/TweetCard';
 import { useNotificationStore } from '@/stores/notifications';
 
@@ -45,11 +45,14 @@ const Page: NextPage = () => {
     <MainLayout title="Tweet">
       {data && (
         <>
-          <NextSeo title={`${data.user.name} on Twitter: "${data.text}"`} />
+          <NextSeo
+            title={`${data.tweet.user.name} on Twitter: "${data.tweet.text}"`}
+          />
 
-          <TweetCard data={data} thread />
-          <CreateTweet tweetId={data.id} />
+          <TweetCard data={data.tweet} thread />
+          <CreateTweet tweetId={data.tweet.id} />
           <Spacer />
+          <Tweets data={data.replies} />
         </>
       )}
     </MainLayout>
