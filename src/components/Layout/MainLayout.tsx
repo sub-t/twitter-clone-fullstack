@@ -28,10 +28,6 @@ export const MainLayout = ({ children, title, home = false }: Props) => {
     );
   }
 
-  if (home && !user) {
-    router.replace('/');
-  }
-
   return (
     <>
       <DeleteTweet />
