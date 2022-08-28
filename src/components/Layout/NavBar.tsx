@@ -35,14 +35,15 @@ const list = [
   { icon: <BellIcon />, title: 'Notifications' },
   { icon: <MailIcon />, title: 'Messages' },
   { icon: <BookmarkIcon />, title: 'Bookmarks' },
-  { icon: <ViewListIcon />, title: 'Lists' },
-  { icon: <UserIcon />, title: 'Profile' },
+  { icon: <ViewListIcon />, title: 'Lists', path: '/user/lists' },
+  { icon: <UserIcon />, title: 'Profile', path: '/user' },
 ];
 
 type Props = {
   user?: User;
 };
 
+// TODO ログアウト(user: undefined)時の対応
 export const NavBar = ({ user }: Props) => {
   const { open } = useComposeTweet();
   const xl2 = useBreakpoint('2xl');
@@ -63,21 +64,27 @@ export const NavBar = ({ user }: Props) => {
           .filter(
             ({ title }) => sm || !(title === 'Bookmarks' || title === 'Lists'),
           )
-          .map(({ icon, title }) => (
-            <Link
-              key={title}
-              href={`${title.toLowerCase()}`}
-              className={clsx(
-                'flex p-3 rounded-full anime hover:bg-slate-200',
-                xl2 && 'w-full',
-              )}
-            >
-              <Slot className="w-7 h-7">{icon}</Slot>
-              {xl2 && (
-                <span className="pl-5 pr-4 text-xl font-normal">{title}</span>
-              )}
-            </Link>
-          ))}
+          .map(({ icon, title, path }) => {
+            const href =
+              path?.replace('user', user?.screenName ?? '') ??
+              title.toLowerCase();
+
+            return (
+              <Link
+                key={title}
+                href={href}
+                className={clsx(
+                  'flex p-3 rounded-full anime hover:bg-slate-200',
+                  xl2 && 'w-full',
+                )}
+              >
+                <Slot className="w-7 h-7">{icon}</Slot>
+                {xl2 && (
+                  <span className="pl-5 pr-4 text-xl font-normal">{title}</span>
+                )}
+              </Link>
+            );
+          })}
         {/* TODO */}
         <Button variant="inverse" size="lg" className={clsx(xl2 && 'w-full')}>
           <DotsCircleHorizontalIcon className="w-7 h-7" />
