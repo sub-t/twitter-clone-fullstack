@@ -7,7 +7,6 @@ import {
   UploadIcon,
 } from '@heroicons/react/outline';
 import clsx from 'clsx';
-import { useRouter } from 'next/router';
 import {
   Avatar,
   Card,
@@ -33,21 +32,16 @@ type Props = {
 
 export const TweetCard = ({ data, reply = false, thread = false }: Props) => {
   const user = data.user;
-  const router = useRouter();
   const { user: authUser } = useAuth();
   const { open: openDeleteTweet } = useDeleteTweetStore();
   const { open: openComposeTweet } = useComposeTweet();
 
   return (
-    <article
-      {...(!thread && {
-        className: 'anime hover:bg-slate-100 cursor-pointer',
-        // TODO
-        onClick: () => router.push(`/${user.screenName}/status/${data.id}`),
-      })}
-    >
+    <article>
       <Card
-        className={clsx(thread && 'pb-0')}
+        className={clsx(
+          thread ? 'pb-0' : 'relative anime hover:bg-slate-100 cursor-pointer',
+        )}
         thread={thread}
         thumbnail={
           <>
