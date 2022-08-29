@@ -6,11 +6,12 @@ import type { LinkProps } from 'next/link';
 
 type Props = LinkProps & WithChildren & WithClassName;
 
+// TODO underline
 export const Link = React.forwardRef<HTMLAnchorElement, Props>(
   ({ className, children, ...props }, ref) => {
     return (
       <NextLink {...props} passHref>
-        <a ref={ref} className={clsx('cursor-pointer hover:underline', className)}>
+        <a ref={ref} className={clsx('cursor-pointer', className)}>
           {children}
         </a>
       </NextLink>
