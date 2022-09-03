@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { FieldWrapper } from './FieldWrapper';
-import type { FieldProps } from './types';
+import { FieldProps } from './types';
 
 type InputFieldProps = FieldProps & {
   type?: 'text' | 'email' | 'password';
@@ -9,7 +9,7 @@ type InputFieldProps = FieldProps & {
 export const InputField = (props: InputFieldProps) => {
   const { type = 'text', label, placeholder, className, registration } = props;
   return (
-    <FieldWrapper label={label} >
+    <FieldWrapper label={label}>
       <input
         type={type}
         className={clsx(

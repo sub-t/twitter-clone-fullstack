@@ -1,4 +1,4 @@
-import type { Favorite, Follows, User } from '@prisma/client';
+import { Favorite, Follows, User } from '@prisma/client';
 
 export type UserWithEntities = User & {
   favorites?: Favorite[];

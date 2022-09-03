@@ -1,5 +1,5 @@
 import create from 'zustand';
-import type { Tweet } from '../types';
+import { Tweet } from '../types';
 
 type Config = {
   data: Tweet;

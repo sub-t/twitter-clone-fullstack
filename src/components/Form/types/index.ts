@@ -1,6 +1,6 @@
-import type { FieldWrapperPassThroughProps } from '../FieldWrapper';
-import type { WithChildren, WithClassName } from '@/types';
-import type { UseFormRegisterReturn } from 'react-hook-form';
+import { UseFormRegisterReturn } from 'react-hook-form';
+import { WithChildren, WithClassName } from '@/types';
+import { FieldWrapperPassThroughProps } from '../FieldWrapper';
 
 export type FieldProps = WithClassName &
   WithChildren &

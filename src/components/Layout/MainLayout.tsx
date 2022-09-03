@@ -5,10 +5,10 @@ import { useAuth } from '@/features/auth';
 import { ComposeTweet } from '@/features/tweets/components/ComposeTweet';
 import { DeleteTweet } from '@/features/tweets/components/DeleteTweet';
 import { useBreakpoint } from '@/hooks/useBreakPoint';
+import { WithChildren } from '@/types';
 import { IconButton } from '../Elements';
 import { Header } from '../Header';
 import { NavBar } from './NavBar';
-import type { WithChildren } from '@/types';
 
 type Props = {
   title: string;

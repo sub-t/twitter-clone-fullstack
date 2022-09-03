@@ -1,10 +1,8 @@
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { CreateFollowsDTO } from '../types';
+import { CreateFollowsDTO } from '../types';
 
-export const createFollows = ({
-  friendId,
-}: CreateFollowsDTO) => {
+export const createFollows = ({ friendId }: CreateFollowsDTO) => {
   return apiClient.post(`/users/follow/${friendId}`);
 };
 

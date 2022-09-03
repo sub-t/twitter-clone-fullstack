@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/Elements';
+import { User } from '@/features/users';
 import { useCreateFollows } from '../api/createFollows';
-import type { User } from '@/features/users';
 
 type Props = {
   data: Pick<User, 'id' | 'screenName'>;

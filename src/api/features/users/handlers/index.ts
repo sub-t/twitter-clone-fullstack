@@ -1,4 +1,4 @@
-import type { NextApiHandler } from 'next';
+import { NextApiHandler } from 'next';
 import { prisma } from '@/api/lib/prisma';
 import { withSessionRoute } from '@/api/lib/session';
 import { getUserResponse } from '../utils/getUserResponse';

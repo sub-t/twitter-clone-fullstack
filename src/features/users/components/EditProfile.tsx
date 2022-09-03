@@ -5,7 +5,7 @@ import { Form, FormDialog, InputField } from '@/components/Form';
 import { useAuth } from '@/features/auth';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { useUpdateProfile } from '../api/updateProfile';
-import type { UpdateProfileDTO } from '../types';
+import { UpdateProfileDTO } from '../types';
 
 const schema = zod.object({
   name: zod.string().min(1, 'Required'),

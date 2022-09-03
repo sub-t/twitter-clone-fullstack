@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 export type WithChildren<T = {}> = T & PropsWithChildren<{}>;
 

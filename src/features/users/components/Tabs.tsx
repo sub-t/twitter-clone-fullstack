@@ -1,6 +1,6 @@
+import { User } from '@prisma/client';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import type { User } from '@prisma/client';
 
 const list = [
   { title: 'Tweets', path: '' },

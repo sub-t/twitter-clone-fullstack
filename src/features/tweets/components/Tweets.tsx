@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { Spacer } from '@/components/Elements';
+import { Tweet } from '../types';
 import { TweetCard } from './TweetCard';
-import type { Tweet } from '../types';
 
 type Props = {
   data: Tweet[];
@@ -9,7 +9,7 @@ type Props = {
 
 export const Tweets = ({ data }: Props) => {
   return (
-    <AnimatePresence initial={false} >
+    <AnimatePresence initial={false}>
       {data &&
         data.map((tweet, index) => (
           <motion.div

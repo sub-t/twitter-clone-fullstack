@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import type { WithClassName } from '@/types';
+import { WithClassName } from '@/types';
 
 type Props = WithClassName & {
   thumbnail: React.ReactNode;

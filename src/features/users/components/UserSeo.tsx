@@ -1,5 +1,5 @@
 import { NextSeo } from 'next-seo';
-import type { User } from '../types';
+import { User } from '../types';
 
 type Props = {
   data: Pick<User, 'name' | 'screenName'>;

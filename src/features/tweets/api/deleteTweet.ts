@@ -1,6 +1,6 @@
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { DeleteTweetDTO } from '../types';
+import { DeleteTweetDTO } from '../types';
 
 export const deleteTweet = ({ tweetId }: DeleteTweetDTO) => {
   return apiClient.delete(`/tweets/${tweetId}`);

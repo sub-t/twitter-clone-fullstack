@@ -1,4 +1,4 @@
-import type { User as BEUser } from '@prisma/client';
+import { User as BEUser } from '@prisma/client';
 
 export type User = Omit<BEUser, 'password'> & {
   followersCount: number;

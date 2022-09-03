@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@/lib/axios';
-import type { Tweet } from '../types';
-import type { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
+import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
+import { Tweet } from '../types';
 
 export const getTimeline = (): Promise<Tweet[]> => {
   return apiClient.get('/timeline');

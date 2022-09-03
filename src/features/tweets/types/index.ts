@@ -1,5 +1,5 @@
-import type { User } from '@/features/users';
-import type { Tweet as BETweet } from '@prisma/client';
+import { Tweet as BETweet } from '@prisma/client';
+import { User } from '@/features/users';
 
 export type Tweet = Omit<BETweet, 'tweetId'> & {
   user: User;

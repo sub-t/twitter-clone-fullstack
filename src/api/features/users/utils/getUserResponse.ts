@@ -1,5 +1,5 @@
-import type { UserWithEntities } from '../types';
-import type { User as FEUser } from '@/features/users';
+import { User as FEUser } from '@/features/users';
+import { UserWithEntities } from '../types';
 
 export const getUserResponse = (
   user: UserWithEntities,

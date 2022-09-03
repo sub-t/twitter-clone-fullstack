@@ -1,7 +1,7 @@
-import type { NextApiHandler } from 'next';
+import { NextApiHandler } from 'next';
+import { IronSessionOptions } from 'iron-session';
 import { withIronSessionApiRoute } from 'iron-session/next';
 import { cookieName } from '../config';
-import type { IronSessionOptions } from 'iron-session';
 
 declare module 'iron-session' {
   interface IronSessionData {

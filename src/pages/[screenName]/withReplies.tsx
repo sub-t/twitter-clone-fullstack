@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { MainLayout } from '@/components/Layout';
 import { Loading } from '@/features/misc';

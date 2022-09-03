@@ -10,8 +10,7 @@ import {
 } from '@radix-ui/react-dropdown-menu';
 import { Slot } from '@radix-ui/react-slot';
 import { AnimatePresence } from 'framer-motion';
-import { Motion } from '../Motion';
-import type { AnimationConfig } from '../Motion';
+import { Motion, AnimationConfig } from '../Motion';
 import type { DialogContentProps } from '@radix-ui/react-alert-dialog';
 
 const normal: AnimationConfig = {

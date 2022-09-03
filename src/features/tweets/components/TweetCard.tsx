@@ -22,7 +22,7 @@ import { formatDate } from '@/utils/formatDate';
 import { formatNumber } from '@/utils/formatNumber';
 import { useComposeTweet } from '../stores/composeTweet';
 import { useDeleteTweetStore } from '../stores/deleteTweetStore';
-import type { Tweet } from '../types';
+import { Tweet } from '../types';
 
 type Props = {
   data: Tweet;

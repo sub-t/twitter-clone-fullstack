@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { WithClassName } from '@/types';
+import { WithClassName } from '@/types';
 
 const variants = {
   light: 'text-white',

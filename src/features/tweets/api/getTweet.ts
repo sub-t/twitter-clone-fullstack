@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '@/lib/axios';
-import type { GetTweetDTO, Tweet } from '../types';
-import type { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
+import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
+import { GetTweetDTO, Tweet } from '../types';
 
 export const getTweet = ({
   tweetId,

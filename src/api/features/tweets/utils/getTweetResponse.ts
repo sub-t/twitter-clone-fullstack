@@ -1,7 +1,7 @@
+import { Favorite, Tweet } from '@prisma/client';
+import { Tweet as FETweet } from '@/features/tweets';
+import { UserWithEntities } from '../../users';
 import { getUserResponse } from '../../users/utils/getUserResponse';
-import type { UserWithEntities } from '../../users';
-import type { Tweet as FETweet } from '@/features/tweets';
-import type { Favorite, Tweet } from '@prisma/client';
 
 export const getTWeetResponse = (
   tweet: Tweet & {
@@ -9,7 +9,7 @@ export const getTWeetResponse = (
     favorites?: Favorite[];
     replies?: Tweet[];
   },
-  authUserId = ''
+  authUserId = '',
 ): FETweet => {
   const { favorites, replies, tweetId, user, ...others } = tweet;
 

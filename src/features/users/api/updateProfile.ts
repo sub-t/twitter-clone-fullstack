@@ -1,6 +1,6 @@
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { UpdateProfileDTO, User } from '../types';
+import { UpdateProfileDTO, User } from '../types';
 
 export const updateProfile = ({ data }: UpdateProfileDTO): Promise<User> => {
   return apiClient.patch('/users', data);

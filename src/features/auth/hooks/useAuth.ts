@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import { User } from '@/features/users';
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { LoginCredentialsDTO, RegisterCredentialsDTO } from '../types';
-import type { User } from '@/features/users';
+import { LoginCredentialsDTO, RegisterCredentialsDTO } from '../types';
 
 const getMe = async (): Promise<User | any> => {
   try {

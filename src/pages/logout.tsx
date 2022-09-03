@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { AlertDialog } from '@/components/Elements';
 import { useAuth } from '@/features/auth';

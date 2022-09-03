@@ -2,7 +2,7 @@ import * as z from 'zod';
 import { Button, Link } from '@/components/Elements';
 import { Form, InputField } from '@/components/Form';
 import { useAuth } from '../hooks/useAuth';
-import type { RegisterCredentialsDTO } from '../types';
+import { RegisterCredentialsDTO } from '../types';
 
 const schema = z.object({
   email: z.string().min(1, 'Required'),

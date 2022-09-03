@@ -1,4 +1,4 @@
-import type { User } from '@prisma/client';
+import { User } from '@prisma/client';
 
 export const sanitizeUser = (user: User): Omit<User, 'password'> => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

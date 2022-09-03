@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import { Spacer } from '@/components/Elements';
 import { MainLayout } from '@/components/Layout';
 import { Loading } from '@/features/misc';

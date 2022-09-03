@@ -1,8 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
-import NextLink from 'next/link';
-import type { WithChildren, WithClassName } from '@/types';
-import type { LinkProps } from 'next/link';
+import NextLink, { LinkProps } from 'next/link';
+import { WithChildren, WithClassName } from '@/types';
 
 type Props = LinkProps & WithChildren & WithClassName;
 

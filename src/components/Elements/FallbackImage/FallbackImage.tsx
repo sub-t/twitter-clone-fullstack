@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import type { WithClassName } from '@/types';
+import { WithClassName } from '@/types';
 
 type Props = WithClassName & {
   src: string | null | undefined;

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from '@/components/Elements';
-import type { WithChildren } from '@/types';
+import { WithChildren } from '@/types';
 
 type Props = WithChildren & {
   title: string;

@@ -15,6 +15,7 @@ import { Slot } from '@radix-ui/react-slot';
 import clsx from 'clsx';
 import { SiTwitter } from 'react-icons/si';
 import { useComposeTweet } from '@/features/tweets/stores/composeTweet';
+import { User } from '@/features/users';
 import { useBreakpoint } from '@/hooks/useBreakPoint';
 import {
   Avatar,
@@ -27,7 +28,6 @@ import {
   Link,
   Spacer,
 } from '../Elements';
-import type { User } from '@/features/users';
 
 const list = [
   { icon: <HomeIcon />, title: 'Home' },

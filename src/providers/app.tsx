@@ -8,7 +8,7 @@ import { Notifications } from '@/components/Notifications';
 import { useAuth } from '@/features/auth';
 import { Seo } from '@/features/misc';
 import { queryClient } from '@/lib/react-query';
-import type { WithChildren } from '@/types';
+import { WithChildren } from '@/types';
 
 const ErrorFallback = () => {
   return (

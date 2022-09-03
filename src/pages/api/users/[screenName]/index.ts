@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { getUser } from '@/api/features/users';
 import { HttpMethod } from '@/types';
 

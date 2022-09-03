@@ -1,3 +1,3 @@
-import type { Favorite as BEFavorite } from '@prisma/client';
+import { Favorite as BEFavorite } from '@prisma/client';
 
 export type Favorite = BEFavorite;

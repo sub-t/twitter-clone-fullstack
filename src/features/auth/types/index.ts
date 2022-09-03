@@ -1,4 +1,4 @@
-import type { User } from '@/features/users';
+import { User } from '@/features/users';
 
 export type LoginCredentialsDTO = Pick<User, 'email'> & {
   password: string;

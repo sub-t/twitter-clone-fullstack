@@ -1,6 +1,6 @@
 import clsx from 'clsx';
+import { WithClassName } from '@/types';
 import { FallbackImage } from '../FallbackImage';
-import type { WithClassName } from '@/types';
 
 const sizes = {
   sm: 'w-10 h-10',

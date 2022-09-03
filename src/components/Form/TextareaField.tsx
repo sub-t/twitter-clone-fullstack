@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { FieldWrapper } from './FieldWrapper';
-import type { FieldProps } from './types';
+import { FieldProps } from './types';
 
 type TextAreaFieldProps = FieldProps;
 

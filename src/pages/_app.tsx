@@ -1,6 +1,6 @@
 import '../styles/index.css';
+import { AppProps } from 'next/app';
 import { AppProvider } from '@/providers/app';
-import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

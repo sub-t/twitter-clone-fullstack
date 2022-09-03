@@ -1,6 +1,6 @@
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { DeleteFollowsDTO } from '../types';
+import { DeleteFollowsDTO } from '../types';
 
 export const deleteFollows = ({ friendId }: DeleteFollowsDTO) => {
   return apiClient.delete(`/users/follow/${friendId}`);

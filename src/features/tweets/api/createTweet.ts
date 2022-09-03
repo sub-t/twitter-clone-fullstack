@@ -1,6 +1,6 @@
 import { useMutationOnSuccess } from '@/hooks/useMutationOnSuccess';
 import { apiClient } from '@/lib/axios';
-import type { CreateTweetDTO, Tweet } from '../types';
+import { CreateTweetDTO, Tweet } from '../types';
 
 export const createTweet = ({ data }: CreateTweetDTO): Promise<Tweet> => {
   return apiClient.post('/tweets', data);

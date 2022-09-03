@@ -5,7 +5,7 @@ import { Form, TextAreaField } from '@/components/Form';
 import { useAuth } from '@/features/auth';
 import { useCreateTweet } from '../api/createTweet';
 import { useComposeTweet } from '../stores/composeTweet';
-import type { CreateTweetDTO } from '../types';
+import { CreateTweetDTO } from '../types';
 
 const schema = zod.object({
   text: zod.string().min(1, 'Required'),

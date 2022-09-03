@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
+import { PromiseValue } from 'type-fest';
 import type { UseQueryOptions, DefaultOptions } from '@tanstack/react-query';
-import type { PromiseValue } from 'type-fest';
 
 const queryConfig: DefaultOptions = {
   queries: {

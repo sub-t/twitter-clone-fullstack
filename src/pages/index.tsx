@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import { Landing } from '@/features/misc';
 
 const Page: NextPage = () => {
