@@ -60,6 +60,9 @@ const getTweetsByUserFn: NextApiHandler = async (req, res) => {
             replies: true,
             favorites: true,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });
@@ -68,10 +71,9 @@ const getTweetsByUserFn: NextApiHandler = async (req, res) => {
       throw Error("This user doesn't exist");
     }
 
-    const tweets = user.tweets
-      .map((tweet) => getTWeetResponse(tweet, authUserId))
-      .sort(sortByCreatedAt);
-
+    const tweets = user.tweets.map((tweet) =>
+      getTWeetResponse(tweet, authUserId),
+    );
     return res.status(200).json(tweets);
   } catch (error: any) {
     if (error?.message) {
@@ -95,6 +97,9 @@ const getTweetsByUserWithRepliesFn: NextApiHandler = async (req, res) => {
             replies: true,
             favorites: true,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
         },
       },
     });
@@ -103,10 +108,9 @@ const getTweetsByUserWithRepliesFn: NextApiHandler = async (req, res) => {
       throw Error("This user doesn't exist");
     }
 
-    const tweets = user.tweets
-      .map((tweet) => getTWeetResponse(tweet, authUserId))
-      .sort(sortByCreatedAt);
-
+    const tweets = user.tweets.map((tweet) =>
+      getTWeetResponse(tweet, authUserId),
+    );
     return res.status(200).json(tweets);
   } catch (error: any) {
     if (error?.message) {
@@ -133,6 +137,9 @@ const getTimelineFn: NextApiHandler = async (req, res) => {
             user: true,
             replies: true,
             favorites: true,
+          },
+          orderBy: {
+            createdAt: 'desc',
           },
         },
         friends: {
@@ -164,7 +171,6 @@ const getTimelineFn: NextApiHandler = async (req, res) => {
     const tweets = [...(user.tweets ?? []), ...(friendTweets ?? [])]
       .map((tweet) => getTWeetResponse(tweet, authUserId))
       .sort(sortByCreatedAt);
-
     return res.status(200).json(tweets);
   } catch (error: any) {
     if (error?.message) {
