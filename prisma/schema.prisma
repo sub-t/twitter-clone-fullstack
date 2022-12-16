@@ -57,7 +57,7 @@ model Tweet {
   replies Tweet[] @relation("TweetReplies")
 
   @@unique([id, userId])
-  @@index([userId])
+  @@index([createdAt(sort: Desc)])
 }
 
 model Favorite {
@@ -70,5 +70,5 @@ model Favorite {
   tweetId String
 
   @@unique([id, userId])
-  @@index([userId])
+  @@index([createdAt(sort: Desc)])
 }
