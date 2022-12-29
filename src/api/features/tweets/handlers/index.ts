@@ -108,10 +108,10 @@ const getTweetsByUserWithRepliesFn: NextApiHandler = async (req, res) => {
       throw Error("This user doesn't exist");
     }
 
-    const tweets = user.tweets.map((tweet) =>
+    const tweetsResponse = user.tweets.map((tweet) =>
       getTWeetResponse(tweet, authUserId),
     );
-    return res.status(200).json(tweets);
+    return res.status(200).json(tweetsResponse);
   } catch (error: any) {
     if (error?.message) {
       return res.status(400).json({ message: error.message });
@@ -126,52 +126,35 @@ const getTimelineFn: NextApiHandler = async (req, res) => {
   try {
     const authUserId = req.session.user!.id;
 
-    const user = await prisma.user.findUnique({
-      where: { id: authUserId },
-      include: {
-        tweets: {
-          where: {
-            tweetId: null,
-          },
-          include: {
-            user: true,
-            replies: true,
-            favorites: true,
-          },
-          orderBy: {
-            createdAt: 'desc',
-          },
-        },
-        friends: {
-          include: {
-            to: {
-              include: {
-                tweets: {
-                  where: {
-                    tweetId: null,
-                  },
-                  include: {
-                    user: true,
-                    replies: true,
-                    favorites: true,
-                  },
+    const tweets = await prisma.tweet.findMany({
+      where: {
+        OR: [
+          { userId: authUserId },
+          {
+            user: {
+              followers: {
+                some: {
+                  fromId: authUserId,
                 },
               },
             },
           },
-        },
+        ],
+      },
+      include: {
+        user: true,
+        favorites: true,
+        tweet: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     });
 
-    if (!user) {
-      throw Error("This user doesn't exist");
-    }
-
-    const friendTweets = user.friends.flatMap((friend) => friend.to.tweets);
-    const tweets = [...(user.tweets ?? []), ...(friendTweets ?? [])]
-      .map((tweet) => getTWeetResponse(tweet, authUserId))
-      .sort(sortByCreatedAt);
-    return res.status(200).json(tweets);
+    const tweetsResponse = tweets.map((tweet) =>
+      getTWeetResponse(tweet, authUserId),
+    );
+    return res.status(200).json(tweetsResponse);
   } catch (error: any) {
     if (error?.message) {
       return res.status(400).json({ message: error.message });
