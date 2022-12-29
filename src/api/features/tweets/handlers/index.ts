@@ -3,7 +3,6 @@ import { prisma } from '@/api/lib/prisma';
 import { withSessionRoute } from '@/api/lib/session';
 import { rejectInvalidRequest } from '@/api/middlewares/rejectInvalidRequest';
 import { getTWeetResponse } from '../utils/getTweetResponse';
-import { sortByCreatedAt } from '../utils/sortByCreatedAt';
 
 const getTweetFn: NextApiHandler = async (req, res) => {
   try {
